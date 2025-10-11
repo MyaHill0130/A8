@@ -119,7 +119,7 @@ class CircularlyLinkedList {
             Node* head_A = this->tail->next;
             
             Node* tail_A = head_A;
-            for(int i = 0; i < halfsize - 1; ++i) {
+            for (int i = 0; i < halfsize - 1; ++i) {
                 tail_A = tail_A->next;
             }
 
@@ -129,6 +129,10 @@ class CircularlyLinkedList {
             //circular
             tail_A->next = head_A;
             A.tail = tail_A;
+            A.sz = halfsize;
+
+            tail_B->next = head_B;
+            B.tail = tail_B;
             B.sz = halfsize;
 
             this->tail = nullptr;

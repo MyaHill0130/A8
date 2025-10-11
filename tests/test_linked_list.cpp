@@ -36,7 +36,7 @@ TEST_CASE("SinglyLinkedList: Rever") {
  }
 }
 
-TEST_CASE("DoublyLinkedList: concat") {
+TEST_CASE("DoublyLinkedList: concatenate") {
     dsa::list::DoublyLinkedList<int> list1;
     dsa::list::DoublyLinkedList<int> list2;
 

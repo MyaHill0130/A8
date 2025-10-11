@@ -7,7 +7,7 @@ project(A8)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
-add_executable(dsac src/main.cpp)
+add_executable(A8 src/main.cpp)
 
 add_executable(
     my_test 

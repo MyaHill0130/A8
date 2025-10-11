@@ -91,6 +91,7 @@ class DoublyLinkedList {
             Node* successor = node->next;
             previous_successor->next = successor;
             successor->prev = previous_successor;
+            delete node;
             sz--;
         }
 
@@ -317,7 +318,7 @@ class DoublyLinkedList {
         }
 
         DoublyLinkedList& operator=(DoublyLinkedList&& other) {
-            if (this != other) {
+            if (this != &other) {
                 clear();
                 delete header;
                 delete trailer;
