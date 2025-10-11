@@ -23,55 +23,85 @@ class CircularlyLinkedList {
         CircularlyLinkedList();
 
         int size() const {
-            // ToDo
+            return sz;
         }
     
         bool empty() const {
-            // ToDo
+            return sz == 0;
         }
 
         T& front() {
-            // ToDo
+            if (empty()) {
+                throw std::runtime_error("Empty List");
+            }
+            return tail->next->elem;
         }
 
         const T& front() const {
-            // ToDo
+            if (empty()) {
+                throw std::runtime_error("Empty List");
+            }
+            return tail->next->elem;
         }
 
         T& back() {
-            // ToDo
+            if (empty()) {
+                throw std::runtime_error("Empty List");
+            }
+            return tail->elem;
         }
 
         const T& back() const {
-            // ToDo
+            if (empty()) {
+                throw std::runtime_error("Empty List");
+            }
+            return tail->elem;
         }
 
         void push_front(const T& elem) {
             if (sz == 0) {
-                // ToDo
+                tail = new Node(elem);
+                tail->next = tail;
             } else {
-                // ToDo
+                Node* new_node = new Node(elem, tail->next);
+                tail->next = new_node;
             }
-            // ToDo
+            sz++;
         }
 
         void push_back(const T& elem) {
-            // ToDo
+            if(empty()) {
+                tail = new Node(elem);
+                tail->next = tail;
+            }
+            else {
+                Node* new_node = new Node(elem, tail->next);
+                tail->next = new_node;
+                tail=new_node;
+            }
+            sz++;
         }
 
         void pop_front() {
-            // ToDo
-            if (head == tail)
-                // ToDo
-            else
-                // ToDo
-            // ToDo
+            if(empty()) {
+                return;
+            }
+            
+            Node* prev_head = tail->next;
+
+            if (prev_head == tail)
+                tail = nullptr;
+            else{
+                tail->next = prev_head->next;
+            }
+            delete prev_head;
+            sz--;
         }
 
 
         void rotate() {
             if (tail != nullptr)
-                // ToDo
+                tail = tail->next;
         }
     
         // Splits the current even-sized circular list into two equal-sized circular lists A and B
@@ -79,55 +109,100 @@ class CircularlyLinkedList {
         //If the size is odd, throw std::logic_error
         void splitEven(CircularlyLinkedList& A, CircularlyLinkedList& B) {
             if (sz == 0) {     // nothing to split
-                // ToDo
+                return;
             }
             if (sz % 2 != 0) {
-                // ToDo
+                throw std::logic_error("Cant split list evenly");
             }
 
-            // ToDo
+            int halfsize = sz/2;
+            Node* head_a = this->tail->next;
+            
+            Node* tail_a = head_a;
+            for(int i = 0; i < halfsize - 1; ++i) {
+                tail_a = tail_a->next;
+            }
+
+            Node* head_b = tail_a->next;
+            Node* tail_b = this->tail;
+
+            //circular
+            tail_a->next = head_a;
+            a.tail = tail_a;
+            b.sz = halfsize;
+
+            this->tail = nullptr;
+            this->sz = 0;
         }
 
     private:
         // presumes valid empty list when called
         void clone(const CircularlyLinkedList& other) {
-            // ToDo
+            if (other.empty()) 
+                return;
+
+            Node* current = other.tail->next;
+            for (int i = 0; i < other.sz; ++i) {
+                push_back(current->elem);
+                current = current->next;
+            }
         }
 
     public:
         // non-member function to swap two lists
         friend void swap(CircularlyLinkedList& a, CircularlyLinkedList& b) {
-            // ToDo
+            using std::swap;
+            swap(a.tail, b.tail);
+            swap(a.sz, b.sz);
         }
 
         // Resets the list to empty
         void clear() {
-            // ToDo
+            while (!empty()) {
+                pop_front();
+            }
         }
 
         // Copy constructor
         CircularlyLinkedList(const CircularlyLinkedList& other) { 
-            // ToDo
+            : sz{0}, tail{nullptr} {
+                clone(other);
+            }
         }
 
         // Copy assignment
         CircularlyLinkedList& operator=(const CircularlyLinkedList& other) {
-            // ToDo
+            if (this != &other) {
+                clear();
+                clone(other);
+            }
+            return *this;
         }
 
         // Move constructor
         CircularlyLinkedList(CircularlyLinkedList&& other) {
-            // ToDo
+            : sz(other.sz), tail(other.tail) {
+                other.tail = nullptr;
+                other.sz = 0;
+            }
         }
 
         // Move assignment
         CircularlyLinkedList& operator=(CircularlyLinkedList&& other) {
-            // ToDo
+            if (this != &other) {
+                clear();
+                tail = other.tail;
+                sz = other.sz;
+
+                other.tail = nullptr;
+                other.sz =  0;
+            }
+            return *this;
         }
 
         // default destructor
         ~CircularlyLinkedList() {
-            // ToDo
+            clear();
         }
 
 };

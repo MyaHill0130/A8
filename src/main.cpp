@@ -73,7 +73,7 @@ int main() {
     // After the operation, M becomes an empty list
     // No nodes are copied or allocated; only pointer links are adjusted.
     // Does nothing if M is empty or if this and M are the same list.
-    //DL.concatenate(DM);
+    DL.concatenate(DM);
 
     std::cout << "\nDL: ";
     for (int x : DL) 
