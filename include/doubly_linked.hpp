@@ -27,7 +27,7 @@ class DoublyLinkedList {
             header = new Node();
             trailer = new Node();
             header->next = trailer;
-            trail->prev = header;
+            trailer->prev = header;
             sz = 0;
         }
 
@@ -119,7 +119,7 @@ class DoublyLinkedList {
         // After the operation, M becomes an empty list
         // No nodes are copied or allocated; only pointer links are adjusted.
         // Does nothing if M is empty or if this and M are the same list.
-        void concat(DoublyLinkedList& M) {
+        void concatenate(DoublyLinkedList& M) {
             if (this == &M) 
                 return; // self-concat not allowed
             if (M.sz == 0) 
@@ -272,7 +272,7 @@ class DoublyLinkedList {
     private:
         // presumes valid empty list when called
         void clone(const DoublyLinkedList& other) {
-            for (*Node p = other.header->next; p != other.trailer; p = p->next) {
+            for (Node* p = other.header->next; p != other.trailer; p = p->next) {
                 push_back(p->elem);
             }
         }
@@ -307,12 +307,13 @@ class DoublyLinkedList {
             return *this;
         }
 
-        DoublyLinkedList(DoublyLinkedList&& other) {
-           : header(other.header), trailer(other.trailer), sz(other.sz) {
+        DoublyLinkedList(DoublyLinkedList&& other) 
+           : header(other.header), trailer(other.trailer), sz(other.sz) 
+           {
                 other.header = nullptr;
                 other.trailer = nullptr;
                 other.sz = 0;
-            } 
+            
         }
 
         DoublyLinkedList& operator=(DoublyLinkedList&& other) {

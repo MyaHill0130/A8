@@ -20,7 +20,7 @@ class CircularlyLinkedList {
 
     public:
         // ToDo: Constructs an empty list
-        CircularlyLinkedList();
+        CircularlyLinkedList() : sz{0}, tail{nullptr} {}
 
         int size() const {
             return sz;

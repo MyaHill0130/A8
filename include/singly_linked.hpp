@@ -23,7 +23,7 @@ class SinglyLinkedList {
     public:
         
         // ToDo: Constructs an empty list
-        SinglyLinkedList();
+        SinglyLinkedList() : sz{0}, head{nullptr}, tail{nullptr} {}
 
         int size() const {
             return sz;
@@ -308,12 +308,13 @@ class SinglyLinkedList {
         }
 
         /// move constructor
-        SinglyLinkedList(SinglyLinkedList&& other) {
-            :sz(other.sz), head(other.head), tail(other.tail) {
+        SinglyLinkedList(SinglyLinkedList&& other) 
+            : sz(other.sz), head(other.head), tail(other.tail)
+             {
                 other.head = nullptr;
                 other.tail = nullptr;
                 other.sz = 0;
-            } 
+            
         }
 
         /// move assignment

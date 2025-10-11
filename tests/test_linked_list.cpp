@@ -46,7 +46,7 @@ TEST_CASE("DoublyLinkedList: concat") {
     list2.push_back(300);
     list2.push_back(400);
 
-    list1.concat(list2);
+    list1.concatenate(list2);
 
     REQUIRE(list1.size() == 4);
     REQUIRE(list1.front() == 100);
