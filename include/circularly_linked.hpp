@@ -116,20 +116,20 @@ class CircularlyLinkedList {
             }
 
             int halfsize = sz/2;
-            Node* head_a = this->tail->next;
+            Node* head_A = this->tail->next;
             
-            Node* tail_a = head_a;
+            Node* tail_A = head_A;
             for(int i = 0; i < halfsize - 1; ++i) {
-                tail_a = tail_a->next;
+                tail_A = tail_A->next;
             }
 
-            Node* head_b = tail_a->next;
-            Node* tail_b = this->tail;
+            Node* head_B = tail_A->next;
+            Node* tail_B = this->tail;
 
             //circular
-            tail_a->next = head_a;
-            a.tail = tail_a;
-            b.sz = halfsize;
+            tail_A->next = head_A;
+            A.tail = tail_A;
+            B.sz = halfsize;
 
             this->tail = nullptr;
             this->sz = 0;
@@ -164,10 +164,8 @@ class CircularlyLinkedList {
         }
 
         // Copy constructor
-        CircularlyLinkedList(const CircularlyLinkedList& other) { 
-            : sz{0}, tail{nullptr} {
+        CircularlyLinkedList(const CircularlyLinkedList& other) : sz{0}, tail{nullptr}  {     
                 clone(other);
-            }
         }
 
         // Copy assignment
@@ -180,11 +178,11 @@ class CircularlyLinkedList {
         }
 
         // Move constructor
-        CircularlyLinkedList(CircularlyLinkedList&& other) {
-            : sz(other.sz), tail(other.tail) {
+        CircularlyLinkedList(CircularlyLinkedList&& other) : sz(other.sz), tail(other.tail) {
+             
                 other.tail = nullptr;
                 other.sz = 0;
-            }
+            
         }
 
         // Move assignment
