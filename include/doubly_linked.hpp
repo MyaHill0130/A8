@@ -120,7 +120,7 @@ class DoublyLinkedList {
         // After the operation, M becomes an empty list
         // No nodes are copied or allocated; only pointer links are adjusted.
         // Does nothing if M is empty or if this and M are the same list.
-        void concatenate(DoublyLinkedList& M) {
+        void concat(DoublyLinkedList& M) {
             if (this == &M) 
                 return; // self-concat not allowed
             if (M.sz == 0) 
